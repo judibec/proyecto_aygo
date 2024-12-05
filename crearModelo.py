@@ -10,7 +10,7 @@ from sklearn.preprocessing import StandardScaler
 import os
 
 # Ruta para guardar el modelo en la EC2
-MODEL_FILE_PATH = '/home/ec2-user/model.pkl'  # Cambia la ruta si necesitas guardarlo en otro lugar
+MODEL_FILE_PATH = '/home/ec2-user/model.pkl'
 ENCODER_FILE_PATH = '/home/ec2-user/encoder.pkl'
 
 # Leer los datos desde el archivo CSV
@@ -18,9 +18,9 @@ CSV_FILE_PATH = 'results.csv'  # Cambiar a la ruta de tu archivo CSV
 df = pd.read_csv(CSV_FILE_PATH)
 
 # Preprocesamiento de los datos
-df['symptoms'] = df['symptoms'].apply(lambda x: ','.join(str(x).split(',')))  # Asegurarse de que los síntomas sean una cadena
-df['conditions'] = df['conditions'].apply(lambda x: ','.join(str(x).split(',')))  # Asegurar que las condiciones sean una cadena
-df['contraindications'] = df['contraindications'].apply(lambda x: ','.join(str(x).split(',')))  # Asegurar que las contraindicaciones sean una cadena
+df['symptoms'] = df['symptoms'].apply(lambda x: ','.join(str(x).split(',')))  
+df['conditions'] = df['conditions'].apply(lambda x: ','.join(str(x).split(',')))  
+df['contraindications'] = df['contraindications'].apply(lambda x: ','.join(str(x).split(','))) 
 df['recommended_medication'] = df['recommended_medication'].apply(lambda x: ','.join(str(x).split(',')))
 
 # Codificar las etiquetas de los medicamentos
@@ -38,14 +38,14 @@ preprocessor = ColumnTransformer(
         ('text', TfidfVectorizer(), 'symptoms'),
         ('conditions', TfidfVectorizer(), 'conditions'),
         ('contraindications', TfidfVectorizer(), 'contraindications'),
-        ('age', StandardScaler(), ['age'])  # Escalar la edad para que se integre bien con las otras características
+        ('age', StandardScaler(), ['age']) 
     ]
 )
 
 # Configurar el pipeline de procesamiento de texto y el modelo
 model = Pipeline([
     ('preprocessor', preprocessor),
-    ('classifier', RandomForestClassifier())  # Modelo de clasificación
+    ('classifier', RandomForestClassifier())
 ])
 
 # Dividir los datos en conjuntos de entrenamiento y prueba

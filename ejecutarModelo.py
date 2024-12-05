@@ -10,8 +10,8 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 # Ruta local al archivo .pkl
-MODEL_FILE_PATH = '/home/ec2-user/model.pkl'  # Ruta al modelo guardado
-ENCODER_FILE_PATH = '/home/ec2-user/encoder.pkl'  # Ruta para guardar el LabelEncoder
+MODEL_FILE_PATH = '/home/ec2-user/model.pkl' 
+ENCODER_FILE_PATH = '/home/ec2-user/encoder.pkl'  
 INPUT_FILE_PATH = '/home/ec2-user/input_data.csv'
 
 # Cargar el modelo y el encoder
